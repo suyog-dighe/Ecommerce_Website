@@ -11,21 +11,37 @@
             </div>
         </header>
 
-        <div class="container">
-            <div class="row">
-                <br/><br/>
-                <center>
-                    <div class="col-8">
-                       
-                        {% for category in categories  %}
-                            <h3> <a href="{% url 'category' category %}">
-                                 {{category}}
-                            </a>  </h3>
-                        {% endfor %}
-                    </div>
-                </center>
-               
+     
+<div class="container my-5">
+    <div class="row justify-content-center">
+        {% for category in categories %}
+        <div class="col-md-5 m-3">
+            <div class="category-box text-center p-4 shadow-lg rounded-3">
+                <a href="{% url 'category' category %}" class="text-decoration-none text-dark fw-bold">
+                    {{ category }}
+                </a>
             </div>
         </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .category-box {
+        background: #f8f9fa;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #007bff;
+        cursor: pointer;
+    }
+    .category-box:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+        background:rgb(234, 203, 171);
+    }
+    .category-box:hover a {
+        color: white;
+    }
+</style>
+
 
 {% endblock %}

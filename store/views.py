@@ -28,10 +28,11 @@ def update_password(request):
         else:
             form = ChangePasswordForm(current_user)
             return render(request,"update_password.html",{'form':form})
-        
+
     else:
-        messages.success(request,"You Must be logged in to update your password") 
-        return redirect('home')
+        current_user = request.user
+        form = ChangePasswordForm(current_user)
+        return render(request,"update_password.html",{'form':form})
 
 def update_user(request):
     if request.user.is_authenticated:
@@ -50,7 +51,6 @@ def update_user(request):
     return render(request,'update_user.html',{})
 
 
-
 def category_summary(request):
     categories = Category.objects.all()
     return render(request,'category_summary.html',{"categories":categories})
@@ -65,7 +65,6 @@ def category(request,foo):
     except:
         messages.success(request,"This Category Doesn't Exist")
         return redirect('home')
-
 
 
 def home(request):
@@ -113,13 +112,8 @@ def register_user(request):
             return redirect('register')
     else:
         return render(request, 'register.html', {'form':form})
-    
+
 
 def product(request,pk):
     product = Product.objects.get(id=pk)
     return render(request,'product.html',{'product':product})
-
-    
-
-    
-
